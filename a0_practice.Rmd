@@ -5,6 +5,7 @@ date: "`r Sys.Date()`"
 output: 
   html_document:
     theme: simplex
+    install.package("gifski")
 ---
 
 ```{r setup, include=FALSE}
@@ -53,3 +54,27 @@ ggplot(mtcars)+
        caption = "Source: mtcars")
 
 ```
+```{r}
+library(scales)
+library(gganimate)
+data("gapminder")
+
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, color = country)) +
+  scale_size(range = c(2, 12),
+             breaks = c(1e07, 1e08, 5e08),
+             labels = label_comma(scale_cut = cut_short_scale())) +
+  scale_color_manual(values = country_colors, guide = "none") +
+  geom_point(alpha = 0.5) +
+  scale_x_log10(labels = label_dollar(scale_cut = cut_short_scale())) +
+  labs(title = "Quality of life over time",
+       subtitle = 'Year: {frame_time}',
+       x = 'GDP per capita',
+       y = 'Life expectancy',
+       size = "Population",
+       caption = "Source: Gapminder") +
+  theme( legend.position = "none") +
+  theme_classic() +
+  # animation components
+  transition_time(year) +
+  ease_aes('linear'
+'''
