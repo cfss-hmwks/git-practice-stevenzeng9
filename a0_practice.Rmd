@@ -4,7 +4,7 @@ author: "Jean Clipperton"
 date: "`r Sys.Date()`"
 output: 
   html_document:
-    theme: spacelab
+    theme: simplex
 ---
 
 ```{r setup, include=FALSE}
@@ -45,7 +45,7 @@ ggplot(mtcars)+
                       size = hp))+ 
                       #label = rownames(mtcars), check_overlap = TRUE) +
   theme_bw() +
-  scale_color_manual(values = c("black", "gray", "blue") ) +
+  scale_color_manual(values = c("black", "gray", "pink") ) +
   labs(title = "Car MPG vs weight", 
        x = 'Miles per gallon',
        y = 'Car weight',
